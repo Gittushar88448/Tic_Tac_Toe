@@ -19,8 +19,11 @@ const winningPositions = [
 function initialize(){
     currentPlayer = "X";
     gameGridBox = ["","","","","","","","",""];
+    newGameButton.classList.remove("active");
     boxes.forEach((box , index) =>{
         box.innerText = "";
+        boxes[index].style.pointerEvents = "all";
+        box.classList = `box box${index+1}`;
     });
     currentStatus.innerText = `Current Player - ${currentPlayer}`; 
 }
@@ -30,9 +33,10 @@ initialize();
 function checkGame(){
     let result = "";
     winningPositions.forEach((position)=>{
-        if((gameGridBox[position[0]] !== "" || gameGridBox[position[1] !== "" || gameGridBox[position[2]]] !== "") 
-        && (gameGridBox[position[0]] === gameGridBox[position[1]] && gameGridBox[position[1]] === gameGridBox[position[2]])){
-            if(gameGridBox[position[0]] === "X"){
+        if( (gameGridBox[position[0]] !== "" || gameGridBox[position[1]] !== "" || gameGridBox[position[2]] !== "") 
+        && (gameGridBox[position[0]] === gameGridBox[position[1]] ) && (gameGridBox[position[1]] === gameGridBox[position[2]])) 
+        {
+            if(gameGridBox[position[0]] == "X"){
                 result = "X";
             }else{
                 result = "O";
@@ -41,16 +45,16 @@ function checkGame(){
             boxes.forEach((box)=>{
                 box.style.pointerEvents = "none";
             });
-            gameGridBox[position[0]].classList.add(".win");
-            gameGridBox[position[1]].classList.add(".win");
-            gameGridBox[position[2]].classList.add(".win");
+            boxes[position[0]].classList.add("win");
+            boxes[position[1]].classList.add("win");
+            boxes[position[2]].classList.add("win");
         }
     });
-}
+
 
 if(result !== ""){
     currentStatus.innerText = `Winner - ${result}`;
-    newGameButton.classList.add(".active");
+    newGameButton.classList.add("active");
 }
 
 let fillCount = 0;
@@ -65,6 +69,7 @@ if(fillCount == 9){
     newGameButton.classList.add("active");
 }
 
+}
 function swapChances(){
     if(currentPlayer === "X"){
         currentPlayer = "O";
@@ -78,7 +83,7 @@ function swapChances(){
 
 
 function handleClick(index){
-    if(gameGridBox === ""){
+    if(gameGridBox[index] === ""){
         gameGridBox[index] = currentPlayer;
         boxes[index].innerText = currentPlayer;
         boxes[index].style.pointerEvents = "none";
@@ -93,6 +98,8 @@ function handleClick(index){
 
 boxes.forEach((box,index) =>{
     box.addEventListener("click" , ()=>{
-        handleSlider(index);
+        handleClick(index);
     });
 });
+
+newGameButton.addEventListener("click", initialize);
