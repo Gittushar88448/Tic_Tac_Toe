@@ -27,6 +27,27 @@ function initialize(){
 
 initialize();
 
+function checkGame(){
+    let result = "";
+    winningPositions.forEach((position)=>{
+        if((gameGridBox[position[0]] !== "" || gameGridBox[position[1] !== "" || gameGridBox[position[2]]] !== "") 
+        && (gameGridBox[position[0]] === gameGridBox[position[1]] && gameGridBox[position[1]] === gameGridBox[position[2]])){
+            if(gameGridBox[position[0]] === "X"){
+                result = "X";
+            }else{
+                result = "O";
+            }
+
+            boxes.forEach((box)=>{
+                box.style.pointerEvents = "none";
+            });
+            gameGridBox[position[0]].classList.add(".win");
+            gameGridBox[position[1]].classList.add(".win");
+            gameGridBox[position[2]].classList.add(".win");
+        }
+    });
+}
+
 function swapChances(){
     if(currentPlayer === "X"){
         currentPlayer = "O";
