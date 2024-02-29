@@ -27,6 +27,17 @@ function initialize(){
 
 initialize();
 
+function swapChances(){
+    if(currentPlayer === "X"){
+        currentPlayer = "O";
+    }
+    else{
+        currentPlayer = "X";
+    }
+    // to show the currentPlayer on UI
+    currentStatus.innerText = `Current Player - ${currentPlayer}`;
+}
+
 
 function handleClick(index){
     if(gameGridBox === ""){
