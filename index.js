@@ -48,6 +48,23 @@ function checkGame(){
     });
 }
 
+if(result !== ""){
+    currentStatus.innerText = `Winner - ${result}`;
+    newGameButton.classList.add(".active");
+}
+
+let fillCount = 0;
+gameGridBox.forEach((box)=>{
+    if(box !== ""){
+        fillCount++;
+    }
+})
+
+if(fillCount == 9){
+    currentStatus.innerText = "Game Tied !";
+    newGameButton.classList.add("active");
+}
+
 function swapChances(){
     if(currentPlayer === "X"){
         currentPlayer = "O";
