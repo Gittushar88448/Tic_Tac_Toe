@@ -27,3 +27,23 @@ function initialize(){
 
 initialize();
 
+
+function handleClick(index){
+    if(gameGridBox === ""){
+        gameGridBox[index] = currentPlayer;
+        boxes[index].innerText = currentPlayer;
+        boxes[index].style.pointerEvents = "none";
+    }
+
+    // swapping turn 
+    swapChances();
+    // regularly checking either game is over or not?
+    checkGame();
+
+}
+
+boxes.forEach((box,index) =>{
+    box.addEventListener("click" , ()=>{
+        handleSlider(index);
+    });
+});
