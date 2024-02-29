@@ -16,3 +16,14 @@ const winningPositions = [
     [2,4,6]
 ];
 
+function initialize(){
+    currentPlayer = "X";
+    gameGridBox = ["","","","","","","","",""];
+    boxes.forEach((box , index) =>{
+        box.innerText = "";
+    });
+    currentStatus.innerText = `Current Player - ${currentPlayer}`; 
+}
+
+initialize();
+
